@@ -1,7 +1,10 @@
+import { TodoDispatchContext } from "../App";
 import "./Creater.css";
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
 
-const Creater = ({ onCreate }) => {
+const Creater = () => {
+  // Context를 통해 불러오
+  const { onCreate } = useContext(TodoDispatchContext);
   const [content, setContent] = useState("");
   const contentRef = useRef("");
 

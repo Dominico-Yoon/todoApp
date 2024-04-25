@@ -1,6 +1,10 @@
+import { useContext, memo } from "react";
 import "./Item.css";
+import { TodoDispatchContext } from "../App";
 
-const Item = ({ id, isDone, content, date, onUpdate, onDelete }) => {
+const Item = ({ id, isDone, content, date }) => {
+  const { onUpdate, onDelete } = useContext(TodoDispatchContext);
+
   const onChangeBox = () => {
     onUpdate(id);
   };
@@ -25,4 +29,5 @@ const Item = ({ id, isDone, content, date, onUpdate, onDelete }) => {
   );
 };
 
-export default Item;
+// memo메서드를 사용하여 해당 아이템 컴포넌트만 리렌더링 하게 한다.
+export default memo(Item);
