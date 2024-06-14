@@ -135,15 +135,22 @@
 <div align=center>
 
 <img height="50" src="https://github.com/Dominico-Yoon/todoApp/assets/142984862/88ed08ac-887b-4dd3-ab85-072eece1b6bc">
-<img height="50" src="https://github.com/Dominico-Yoon/todoApp/assets/142984862/2f6fd621-3fb6-4cd3-b893-9e39b78d5db6">
-<img height="50" src="https://github.com/Dominico-Yoon/todoApp/assets/142984862/71f6407a-5bc8-4cd5-8eb4-e29c9b834765">
+<img height="50" src="https://github.com/Dominico-Yoon/todoApp/assets/142984862/61494a14-28eb-4377-af80-a3b403478874">
+<img height="50" src="https://github.com/Dominico-Yoon/todoApp/assets/142984862/627d3629-6afa-49ae-9817-13a5b8665018">
+<img height="50" src="https://github.com/Dominico-Yoon/todoApp/assets/142984862/4794607d-4147-4363-afd5-9df2f6e4f8b4">
 <img height="50" src="https://github.com/Dominico-Yoon/todoApp/assets/142984862/2e72cc60-8d35-4a43-80f2-f5700ba89823">
 
 </div>
 
-- 사용한 기술 스택 : HTML, CSS, JavaScript, React
+- 사용한 기술 스택 : HTML, CSS, JavaScript, TypeScript, React
 
 ## [프로젝트를 하며 느낀 점]
+20240615 추가
+TypeScript로 Migration을 처음 작업을 하게 되었을때는 너무 어렵게만 생각하여 지레 겁을 먹었습니다.
+compilerOptions중 strict: true로 작업을 진행하여 오류가 많이 발생 할 수 있다고 생각을 했지만,
+오류가 많지않아 빠르게 작업을 진행 할 수 있었습니다.
+또 처음으로 만든 리액트 앱이 생각보다 이상없이 잘 만들어 졌다고도 생각이 듭니다.
+아직은 TypeScript에 어려움을 갖고 있지만, 조금 더 발전 했다는 것을 느꼇습니다.
 
 Front-End 프로젝트를 처음 진행 하여 다소 작은 어플리케이션이라도 시간이 많이 걸렸다.
 React Hook들에 대해 조금더 깊이 공부를 해봐야 할거 같다.
