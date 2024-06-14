@@ -2,7 +2,15 @@ import "./App.css";
 import Header from "./components/Header";
 import Creater from "./components/Creater";
 import List from "./components/List";
-import { useRef, useReducer, useCallback, createContext, useMemo } from "react";
+import {
+  useRef,
+  useReducer,
+  useCallback,
+  createContext,
+  useMemo,
+  useContext,
+} from "react";
+import { Todo } from "./types";
 
 const mockData = [
   {
@@ -25,8 +33,23 @@ const mockData = [
   },
 ];
 
+// reducer함수의 action 타입 생성
+type Action =
+  | {
+      type: "CREATE";
+      data: {
+        id: number;
+        isDone: boolean;
+        content: string;
+        date: string;
+      };
+    }
+  | { type: "UPDATE"; targetId: number }
+  | { type: "DELETE"; targetId: number };
+
+// state, action 매개변수에 타입 선언
 // useReducer를 사용하여 로직들을 컴포넌트 외부로 옮김
-function reducer(state, action) {
+function reducer(state: Todo[], action: Action) {
   switch (action.type) {
     case "CREATE":
       return [action.data, ...state];
@@ -46,9 +69,28 @@ function reducer(state, action) {
 
 // Context를 사용하여 Prop으로 전달하지고 Context.Provider로 전달 (Props Drilling 예방)
 // 1. 변하는 값은 StateContext로 전달
-export const TodoStateContext = createContext();
+export const TodoStateContext = createContext<Todo[] | null>(null);
 // 2. 변하지 않는 함수는 DispatchContext로 전달
-export const TodoDispatchContext = createContext();
+export const TodoDispatchContext = createContext<{
+  onCreate: (content: string) => void;
+  onUpdate: (targetId: number) => void;
+  onDelete: (targetId: number) => void;
+} | null>(null);
+
+// 3. custom hook을 사용하여 옵셔널(?)을 사용하지 않게끔 context 불러오기
+export function useTodoState() {
+  const state = useContext(TodoStateContext);
+
+  if (!state) throw new Error("TodoState에 문제 발생!!!");
+  return state;
+}
+
+export function useTodoDispatch() {
+  const dispatch = useContext(TodoDispatchContext);
+
+  if (!dispatch) throw new Error("TodoDispatch에 문제 발생!!!");
+  return dispatch;
+}
 
 function App() {
   // useReducer를 사용하여 로직들을 컴포넌트 외부로 옮김
@@ -56,7 +98,7 @@ function App() {
   const idRef = useRef(3);
 
   // useCallback 사용하여 더이상 리렌더링 되지 않게 최적화
-  const onCreate = useCallback((content) => {
+  const onCreate = useCallback((content: string) => {
     dispatch({
       type: "CREATE",
       data: {
@@ -68,14 +110,14 @@ function App() {
     });
   }, []);
 
-  const onUpdate = useCallback((targetId) => {
+  const onUpdate = useCallback((targetId: number) => {
     dispatch({
       type: "UPDATE",
       targetId: targetId,
     });
   }, []);
 
-  const onDelete = useCallback((targetId) => {
+  const onDelete = useCallback((targetId: number) => {
     dispatch({
       type: "DELETE",
       targetId: targetId,

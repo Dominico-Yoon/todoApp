@@ -1,14 +1,16 @@
 import "./List.css";
 import Item from "./Item";
-import { useContext, useState } from "react";
-import { TodoStateContext } from "../App";
+import React, { useContext, useState } from "react";
+import { TodoStateContext, useTodoState } from "../App";
+import { Todo } from "../types";
 
 const List = () => {
   // Context를 통해 불러오기
-  const newTodos = useContext(TodoStateContext);
+  // const newTodos = useContext(TodoStateContext);
+  const newTodos = useTodoState();
   const [search, setSearch] = useState("");
 
-  const onChangeSearch = (e) => {
+  const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   };
 
@@ -16,7 +18,7 @@ const List = () => {
     if (search === "") {
       return newTodos;
     }
-    return newTodos.filter((todo) =>
+    return newTodos.filter((todo: Todo) =>
       todo.content.toLowerCase().includes(search.toLowerCase())
     );
   };

@@ -1,29 +1,30 @@
 import { useContext, memo } from "react";
 import "./Item.css";
-import { TodoDispatchContext } from "../App";
+import { TodoDispatchContext, useTodoDispatch } from "../App";
+import { Todo } from "../types";
 
-const Item = ({ id, isDone, content, date }) => {
-  const { onUpdate, onDelete } = useContext(TodoDispatchContext);
+const Item = (props: Todo) => {
+  const dispatch = useTodoDispatch();
 
   const onChangeBox = () => {
-    onUpdate(id);
+    dispatch.onUpdate(props.id);
   };
 
   const onClickDelete = () => {
-    if (isDone === false) {
+    if (props.isDone === false) {
       alert("아직 하지 완료하지 못하여 삭제 불가능합니다.");
       return;
     }
 
     alert("완료 하여 삭제합니다.");
-    onDelete(id);
+    dispatch.onDelete(props.id);
   };
 
   return (
     <div className="Items">
-      <input onChange={onChangeBox} checked={isDone} type="checkbox" />
-      <div className="Item">{content}</div>
-      <div className="Date">{date}</div>
+      <input onChange={onChangeBox} checked={props.isDone} type="checkbox" />
+      <div className="Item">{props.content}</div>
+      <div className="Date">{props.date}</div>
       <button onClick={onClickDelete}>삭제</button>
     </div>
   );

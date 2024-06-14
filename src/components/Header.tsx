@@ -1,3 +1,5 @@
+// 헤더는 부모노드로 부터 상속받는 값이 없어 수정 없음.
+
 import "./Header.css";
 import { useState } from "react";
 
